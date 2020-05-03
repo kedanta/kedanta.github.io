@@ -1,0 +1,75 @@
+#container, body {
+  -moz-transform-style: preserve-3d;
+}
+
+body {
+  overflow: hidden;
+  background-color: #a9a9a9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -moz-transform: perspective(1000px);
+  -webkit-perspective: 1000px;
+}
+
+#container, .figure, .gsap, .tagline {
+  outline: transparent solid 1px;
+  position: absolute;
+  left: 50%;
+}
+
+#container {
+  top: 50%;
+  margin-left: -250px;
+  margin-top: -265px;
+  height: 537px;
+  width: 500px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  background: url(../../assets/img/background.jpg?h=815b934bb5d4b3a4086ced17f6b8785d) no-repeat;
+  transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.figure {
+  width: 142px;
+  height: 483px;
+  background: url(../../assets/img/tron.png?h=9769da36a2d17883391a08337f24b23b) no-repeat;
+  transform: translateZ(120px);
+  -moz-transform: translateZ(120px);
+  -webkit-transform: translateZ(120px);
+  bottom: 0;
+  margin-left: -71px;
+}
+
+.gsap {
+  width: 396px;
+  height: 128px;
+  background: url(../../assets/img/GSAP.png?h=15f4b24ecc301eedc9233cc45c34a261) no-repeat;
+  transform: translateZ(60px);
+  -moz-transform: translateZ(60px);
+  -webkit-transform: translateZ(60px);
+  top: 30px;
+  margin-left: -198px;
+}
+
+.tagline {
+  width: 500px;
+  transform: translateZ(80px);
+  -moz-transform: translateZ(80px);
+  -webkit-transform: translateZ(80px);
+  bottom: 0;
+  margin-left: -280px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background: rgba(0,0,0,.6);
+  font-family: Helvetica-Neue,san-serif;
+  color: #FFF;
+  font-size: 30px;
+  line-height: 60px;
+  text-align: center;
+}
+
