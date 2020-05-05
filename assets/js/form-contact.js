@@ -1,4 +1,3 @@
-
 // JavaScript contact form Document
 $(document).ready(function() {
 	$('form#contact-form').submit(function() {
