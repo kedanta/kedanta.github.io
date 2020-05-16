@@ -208,7 +208,7 @@ a:hover{
     letter-spacing: 0.6px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
-	height: 100%!important;
+	height: 100%;
 }
 .banner_content .banner_btn:hover{
 	background: #1461ff;
@@ -231,8 +231,8 @@ a:hover{
     transition: all 0.4s ease-in-out 0s;
 }
 .main_btn:focus, .main_btn:hover {
-    color: #1461ff;
-    background: #fff;
+    color: #fff;
+	background: linear-gradient(95deg,rgba(88, 195, 255,.8) 0,rgba(0, 77, 230,.8) 40%,rgba(0, 59, 177,.8) 100%);
 	border: none;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 25px;
 }
