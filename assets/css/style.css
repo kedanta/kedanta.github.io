@@ -1,16 +1,3 @@
-/***************************************
-========================================
-
-	Author Name   : belaltheme
-	This is html template
-	Template Name : Dekha - Creative Personal Resume/portfolio Template
-	Version: 1.0
-	
-****************************************
-=======================================/
-
-
-
 /* ----------------------------------------------------------------
 
  ==> Table Of Content
@@ -356,6 +343,7 @@ a:hover{
 .banner_bg:before{
 	content: "";
 	position: fixed;
+	top: 0;
 	right: 0;
 	bottom: 0;
 	width: 100%;
@@ -369,11 +357,11 @@ a:hover{
 	top: 0;
 }
 .banner_content{
-	margin-top: 250px;
+	margin-top: 100px;
 }
 .banner_content strong {
     color: #1461ff;
-    font-size: 30px;
+    font-size: auto;
     background: #fff;
     padding: 4px 18px;
     border-radius: 5px;
@@ -1190,10 +1178,10 @@ svg {
 /* ----------------------------------------------------------------
     [ End Top-control ]
 -----------------------------------------------------------------*/
-.form-daftar{
-	margin-top: 10%;
-}
 
+.pmin{
+	margin-top: -40px;
+}
 /* ----------------------------------------------------------------
     [ End Top-control ]
 ----------------------------------------------------------------- */
