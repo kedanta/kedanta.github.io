@@ -482,7 +482,7 @@ a:hover{
 	width: 100%;
 	position: fixed;
 	z-index: 1;
-	padding-top: 30px;
+
 }
 .banner_bg:after {
     content: "";
