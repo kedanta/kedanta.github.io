@@ -202,14 +202,13 @@ a:hover{
 -----------------------------------------------------------------*/
 /* Start Btn-Style */
 .banner_content .banner_btn {
-    padding: 13px 41px;
     font-size: 18px;
     font-weight: 600;
     border-radius: 0;
     letter-spacing: 0.6px;
-    margin-bottom: 45px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
+	height: 100%;
 }
 .banner_content .banner_btn:hover{
 	background: #1461ff;
@@ -337,17 +336,17 @@ a:hover{
 	background-image: url(../images/banner.jpg);
 	background-position:center;
 	position: fixed;
-	height: 100%;
-	width: 100%;
+	height: 100%!important;
+	width: 100%!important;
 }
+
 .banner_bg:before{
 	content: "";
-	position: fixed;
+	position: absolute;
 	top: 0;
 	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
+	width: 100%!important;
+	height: 100%!important;
 	background: -webkit-linear-gradient(-45deg,rgba(88, 195, 255,.7) 0,rgba(0, 77, 230,.7) 40%,rgba(0, 59, 177,.7) 100%);
 }
 #particles-js {
@@ -357,7 +356,8 @@ a:hover{
 	top: 0;
 }
 .banner_content{
-	margin-top: 100px;
+	padding-top: 70px;
+	height: 100%;
 }
 .banner_content strong {
     color: #1461ff;
@@ -480,12 +480,13 @@ a:hover{
 }
 .banner_bg{
 	width: 100%;
-	position: relative;
+	position: fixed;
 	z-index: 1;
+	padding-top: 30px;
 }
 .banner_bg:after {
-    position: absolute;
     content: "";
+	position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -1174,13 +1175,6 @@ svg {
 .topcontrol:hover {
     background: #fff;
     color: #1461ff;
-}
-/* ----------------------------------------------------------------
-    [ End Top-control ]
------------------------------------------------------------------*/
-
-.pmin{
-	margin-top: -40px;
 }
 /* ----------------------------------------------------------------
     [ End Top-control ]
