@@ -364,6 +364,9 @@ a:hover{
     padding: 4px 18px;
     border-radius: 5px;
 }
+.banner_content .tittle1 {
+    border-radius: 5px;
+}
 .banner_content h1 {
     color: #fff;
     font-size: 50px;
