@@ -208,7 +208,7 @@ a:hover{
     letter-spacing: 0.6px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
-	height: 100%;
+	height: 100%!important;
 }
 .banner_content .banner_btn:hover{
 	background: #1461ff;
@@ -327,30 +327,28 @@ a:hover{
      [ 04 Start Banner ]
 -----------------------------------------------------------------*/
 .main_banner{
-	height: 100%;
 	background-size:contain;
 	background-repeat: no-repeat;
-	position: fixed;
+
 }
 .banner_bg{
 	background-image: url(../images/banner.jpg);
 	background-position:center;
-	position: fixed;
-	height: 100%!important;
-	width: 100%!important;
+	height: 100%;
+	width: 100%;
 }
 
 .banner_bg:before{
 	content: "";
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: 0;
-	width: 100%!important;
-	height: 100%!important;
+	width: 100%;
+	height: 100%;
 	background: -webkit-linear-gradient(-45deg,rgba(88, 195, 255,.7) 0,rgba(0, 77, 230,.7) 40%,rgba(0, 59, 177,.7) 100%);
 }
 #particles-js {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
 	top: 0;
@@ -480,13 +478,13 @@ a:hover{
 }
 .banner_bg{
 	width: 100%;
-	position: fixed;
+	position: absolute;
 	z-index: 1;
 
 }
 .banner_bg:after {
     content: "";
-	position: absolute;
+	position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -1175,6 +1173,10 @@ svg {
 .topcontrol:hover {
     background: #fff;
     color: #1461ff;
+}
+
+.form-daftar{
+	height: 100%
 }
 /* ----------------------------------------------------------------
     [ End Top-control ]
