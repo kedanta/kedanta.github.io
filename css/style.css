@@ -760,7 +760,6 @@ main {
 .menu__item {
 	color: var(--color-menu);
 	line-height: 1.1;
-	text-transform: lowercase;
 	letter-spacing: -0.025em;
 	text-indent: -0.025em;
 	font-family: 'Poppins', sans-serif;
