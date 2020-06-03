@@ -58,9 +58,11 @@
 
 <script src="redirection-mobile.js"></script>
 <script>
-	SA.redirection_mobile();
-		mobile_url : "m.kedanta.team",
-		mobile_prefix : "https"
+	SA.redirection_mobile ({
+		redirection_param : "mobile_redirection",
+		mobile_prefix : "mobile",
+		cookie_hours : "2" 
+	});
 </script>
 	
 </head>
