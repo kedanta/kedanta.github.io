@@ -87,7 +87,7 @@
 		//Countdown
 		
         $('.countdown').downCount({
-            date: '06/21/2020 19:00:00'
+            date: '06/18/2020 19:30:00'
         }, function () {
             alert('Sesi Ini Telah Selesai');
         });
