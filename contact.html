@@ -6,10 +6,11 @@
 <meta name="description" content="Cenky Portfolio Template">
 <meta name="keywords" content="personal, portfolio">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
  
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css"/>
- 
+
   	<!--[if lt IE 9]>
   	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -22,9 +23,12 @@
     <link rel="stylesheet" href="icon-fonts/fontawesome-5.0.6/css/fontawesome-all.min.css"/>
     <link rel="stylesheet" href="icon-fonts/flaticon/flaticon.css" />
 
-     <!-- Google Font -->
+	   <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap&subset=latin-ext" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Teko:500,600&display=swap&subset=latin-ext" rel="stylesheet">
+
+
+
 
 </head> 
 <body> 
@@ -38,12 +42,13 @@
 
 <main>
 
-<!-- HEADER 
+<!-- HEADER
 ==================================================-->
 <header>
-  <a href="index.html" class="logo float-left"><img src="img/logo.png" alt=""> </a>
+  <a data-type="ajax-load" href="index.html" class="logo float-left"><img src="img/logo.png" alt=""> </a>
   <div class="menu float-right"><img src="img/menu.png" alt=""></div>
 </header>
+
 
 <!-- RIGHT MENU
 ==================================================-->
@@ -72,68 +77,78 @@
 </div>
 
 
-<!-- ALL PROJECT
+<div id="smooth-scroll">
+
+<!-- PAGE
 ==================================================-->
-<div class="all-projects">
-  <div class="close-icon"></div>
-    <div class="container">
-    <ul>
-      <li><a  data-type="ajax-load" href="portfolio-one.html">Truckers Vol ll</a><img src="img/works/work-1/slider-1.jpg" alt=""></li>
-      <li><a  data-type="ajax-load" href="portfolio-two.html">The Wild West</a><img src="img/works/work-2/slider-2.jpg" alt=""></li>
-      <li><a  data-type="ajax-load" href="portfolio-three.html">Homeless Art</a><img src="img/works/work-3/slider-3.jpg" alt=""></li>
-      <li><a  data-type="ajax-load" href="portfolio-four.html">Sport Car Gti</a><img src="img/works/work-4/slider-4.jpg" alt=""></li>
-      <li><a  data-type="ajax-load" href="portfolio-five.html">Red Football</a><img src="img/works/work-5/slider-5.jpg" alt=""></li>
-      <li><a  data-type="ajax-load" href="portfolio-six.html">Botanica</a><img src="img/works/work-6/01.jpg" alt=""></li>
-      <li><a  data-type="ajax-load" href="portfolio-seven.html">Carolina Heves</a><img src="img/works/work-7/01.jpg" alt=""></li>
-    </ul>
+<div class="container text-left subpage">
+  <h1 class="page-title text-animation">Contact Us</h1>
+  <p class="subtext top_30 text-animation">We're an interactive agency and scalable web designs and mobile apps, currently based in New York. We're passionate about quality code and security.</p>
+
+<!-- MAP
+==================================================-->
+<div class="contact-map top_90 box-animation">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36479.43458460815!2d-118.3131125302928!3d34.05808678462837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos+Angeles%2C+Kaliforniya%2C+Birle%C5%9Fik+Devletler!5e0!3m2!1str!2str!4v1551872109031" height="450" style="border:0" allowfullscreen=""></iframe>
+</div>
+
+<!-- CONTACT INFO
+==================================================-->
+
+<div class="getintouch row top_120">
+  <!-- contact info -->
+  <div class="col-lg-4 contact-info box-animation">
+    <!-- info -->
+    <div class="info">
+      <i class="fas fa-paper-plane"></i>
+      <a href="#">hello@cenky.com</a>
+      <p> Email </p>
+    </div>
+    <!-- info -->
+    <div class="info top_30">
+      <i class="fas fa-map-marker-alt"></i>
+      <p class="text">1444 S. Alameda Street Los Angeles,<br>California 90021</p>
+      <p> Address </p>
+    </div>
+    <!-- info -->
+    <div class="info top_30">
+      <i class="fas fa-phone"></i>
+      <a href="#">0800 123 456789</a>
+      <p> Phone </p>
+    </div>
+  </div>
+  <div class="col-lg-8 contact-form box-animation">
+    <!-- contact form -->
+      <form class="contact-form">
+          <div class="row">
+              <!--Name-->
+              <div class="col-md-6">
+                  <input class="form-inp" type="text" placeholder="Name">
+              </div>
+              <!--Email-->
+              <div class="col-md-6">
+                  <input class="form-inp" type="text" placeholder="Email">
+              </div>
+              <div class="col-md-12">
+                  <!--Message-->
+                  <textarea placeholder="How can I help you?" rows="7"></textarea>
+                  <button id="con_submit" class="site-btn top_45 pull-right" type="submit">Submit</button>
+              </div>
+          </div>
+      </form>
   </div>
 </div>
 
-
-<!-- SLIDER
-==================================================-->
-<div class="ws-pages">
-  <div class="ws-bgs">
-    <div class="ws-bg"></div>
-    <div class="ws-bg"></div>
-    <div class="ws-bg"></div>
-    <div class="ws-bg"></div>
-    <div class="ws-bg"></div>
-  </div>
-  <div class="ws-text">
-    <a data-type="ajax-load" href="portfolio-one.html" class="slider-text-heading">
-      <h2 class="title">Truckers Vol ll</h2>
-      <span class="number">01</span>
-    </a>
-    <a data-type="ajax-load" href="portfolio-two.html" class="slider-text-heading">
-      <h2 class="title">The Wild West</h2>
-      <span class="number">02</span>
-    </a>
-    <a data-type="ajax-load" href="portfolio-three.html" class="slider-text-heading">
-      <h2 class="title">Homeless Art</h2>
-      <span class="number">03</span>
-    </a>
-    <a data-type="ajax-load" href="portfolio-four.html" class="slider-text-heading">
-      <h2 class="title">Sport Car GTI</h2>
-      <span class="number">04</span>
-    </a>
-    <a data-type="ajax-load" href="portfolio-five.html" class="slider-text-heading">
-      <h2 class="title">Red Football</h2>
-      <span class="number">05</span>
-    </a>
-  </div>
 </div>
 
-<!-- BOTTOM CONTROLS
+  <!-- FOOTER
 ==================================================-->
-<div class="slider-bottom">
-  <!-- Navigation -->
-  <div class="navigate float-left">
-    <a class="next"><i class="fas fa-chevron-up"></i></a>
-    <a class="prev"><i class="fas fa-chevron-down"></i></a>
+<footer>
+  <div class="back-top float-left">
+    <i class="fas fa-chevron-up"></i> <p>Back to Top</p>
   </div>
-  <!-- See All -->
-  <div class="see-all">See All Project </div>
+  <div class="float-left copyright">
+    <p>2019 copyright © tavonline</p>
+  </div>
   <!-- Social Links -->
   <div class="social float-right">
       <a href="#"><i class="fab fa-facebook-f"></i>  </a>
@@ -141,12 +156,13 @@
       <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i>  </a>
       <a href="#"><i class="fab fa-behance" aria-hidden="true"></i>  </a>
       <a href="#"><i class="fab fa-dribbble" aria-hidden="true"></i>  </a>
-  </div> 
-</div>
+  </div>
+</footer>
 
-
+</div> <!-- smooth scroll end -->
 
 </main>
+
 <!-- Javascripts -->
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/plugins.js"></script>

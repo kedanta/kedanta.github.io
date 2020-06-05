@@ -1,899 +1,566 @@
-pagefect();
-others();
-carousel();
-nav_type();
-PortfolioGrids();
-cform();
-typist();
-port_close();
-lightbox();
-preloader();
-backlink();
-down_icon();
-slider();
-ContactForm();
+ 
+$(document).ready( function() {
 
-var doit;
-window.onresize = function(){
-  clearTimeout(doit);
-  doit = setTimeout(nav_type, 100);
+function ajaxload () {
+  partslider();
+	leftmenu();
+  owlslider();
+  backtop();
+  allproject();
+  lightbox();
+  $('main').prepend('<div class="page-effect"></div>');
+  preloader();
+  mobile();
+  page_anim();
+  hasTouch();
+  sidebar();
+}
+
+function mobile(){
+  if ( $(window).width() >= 1024 ){   
+    smooth_scroll();
+  }  
+}
+ajaxload();
+
+
+   // AJAX LOAD    
+        $("main").on('click','[data-type="ajax-load"]', function(e) {
+
+            TweenLite.to(".page-effect", .9, {css:{width:"101-%"}, delay:.6, easy: Quad.easeInOut });
+            TweenLite.to(".right-menu", .2, {css:{width:"101-%"}, delay:.2, easy: Quad.easeInOut });
+            TweenLite.to(".right-menu nav, .right-menu .social, .right-menu .close-icon", .2, {css:{opacity:"0"}, delay:.2, easy: Quad.easeInOut });
+            $(".right-menu").css('z-index', '100');
+            var href = $(this).attr("href");
+
+            loadHtml();
+            function loadHtml() {
+
+                setTimeout(function() {
+                    loadContent(href);            
+                    history.pushState('', 'new URL: '+href, href);        
+                },1500);
+
+            }
+            e.preventDefault();
+        });
+        window.onpopstate = function(event) {
+            location.reload();
+        };
+        function loadContent(url) {
+
+
+            var getData = $.get(url, function(response) {
+                var markup = $("<main>" + response + "</main>");
+                var fragment = markup.find("main").html();
+                var title = markup.find("title").html();
+                $('head title').html( title );
+
+                $("main").html(fragment);
+
+
+                ajaxload();
+                    if($('.ws-pages').length){
+                        location.reload();
+                    }
+                $('main').prepend('<div class="preloader"><div class="loader"><div class="loader-inner"></div></div></div>');
+
+                $(".page-effect").css('width', '100%');
+                TweenLite.to(".page-effect", .5, {css:{width:"0%"}, delay:.2, easy: Quad.easeInOut });
+
+
+            });
+        }
+
+
+// SLIDER
+function partslider () { 
+
+// if ($('.ws-pages').length) {
+//   if (window.location.href.substr(-2) !== '?r') {
+//       window.location = window.location.href + '?r';
+//   }
+// }
+
+window.requestAnimFrame = (function() {
+  return window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    function(callback){
+    window.setTimeout(callback, 1000 / 60);
+  };
+})();
+
+function rafThrottle(fn) {
+  var busy = false;
+  return function() {
+    if (busy) return;
+    busy = true;
+    fn.apply(this, arguments);
+    requestAnimFrame(function() {
+      busy = false;
+    });
+  };
 };
 
-function ajaxLoad (){
-carousel();
-others();
-nav_type();
-PortfolioGrids();
-cform();
-typist();
-port_close();
-lightbox();
-preloader();
-backlink();
-down_icon();
-slider();
-ContactForm();
-    
-    var doit;
-    window.onresize = function(){
-      clearTimeout(doit);
-      doit = setTimeout(nav_type, 100);
-	};
-}
+  var $wsPages = $(".ws-pages");
+  var $headings = $(".slider-text-heading");
+  var bgParts = 24;
+  var staggerVal = 65;
+  var staggerStep = 4;
+  var textH = $(".ws-text").height();
+  var winW = $(window).width();
+  var winH = $(window).height();
+  var curPage = 1;
+  var numOfPages = $(".ws-bg").length;
+  var changeAT = 0.5;
+  var waveStartDelay = 0.2;
+  var waveStagger = 0.013;
+  var waveBlocked = false;
+  var index = 1;
+  var startY = 0;
+  var deltaY = 0;
+  var headingsY = 0;
+  var $parts;
 
+  function initBgs() {
+    var arr = [];
+    var partW = 100 / bgParts;
 
-//AJAX LOAD    
-$("main").on('click','[data-type="ajax-load"]', function(e) {
+    for (var i = 1; i <= bgParts; i++) {
+      var $part = $('<div class="ws-bg__part">');
+      var $inner = $('<div class="ws-bg__part-inner">');
+      var innerLeft = 100 / bgParts * (1 - i);
 
-$(".page-overlay").addClass("from-bottom");
-var href = $(this).attr("href");
-loadHtml();
-function loadHtml() {
-	setTimeout(function() {
-		loadContent(href);            
-		history.pushState('', 'new URL: '+href, href);        
-	},1000);
-}
-e.preventDefault();
-});
-function loadContent(url) {
-	var getData = $.get(url, function(response) {
-		var markup = $("<main>" + response + "</main>");
-		var fragment = markup.find("main").html();
-		var title = markup.find("title").html();
-		$('head title').html( title );
-		$("main").html(fragment);
-		ajaxLoad();
-		window.scrollTo(0, 0);
-		$(".page-overlay").addClass("from-bottom");
-		setTimeout( function(){
-		  $(".page-overlay").addClass("from-bottom-end");
-		  setTimeout( function(){
-			$(".page-overlay").removeClass("from-bottom");
-			$(".page-overlay").removeClass("from-bottom-end");
-		  } , 800 );
-		} , 500 );
+      $inner.css("left", innerLeft + "vw");
+      $part.append($inner);
+      $part.addClass("ws-bg__part-" + i).width(partW + "%");
+      arr.push($part);
+    }
 
-	});
-}
+    $(".ws-bg").append(arr);
+    $wsPages.addClass("s--ready");
+    $parts = $(".ws-bg__part");
+  };
 
-function down_icon(){
-	$('.section-down-arrow.subpage').on('click', function() {
-		var vheight = $('.work-hero').height();
-	  $('html, body').animate({scrollTop :vheight},800);
-	  return false;
-	});
+  initBgs();
+
+  function changePages() {
+    var y = (curPage - 1) * winH * -1;
+    var textY = textH * (curPage - 1) * -1;
+    var leftMax = index - 1;
+    var rightMin = index + 1;
+
+    TweenLite.to(".ws-bg__part-" + index, changeAT, {y: y});
+
+    for (var i = leftMax; i > 0; i--) {
+      var d = (index - i) * waveStagger;
+      TweenLite.to(".ws-bg__part-" + i, changeAT - d, {y: y, delay: d});
+    }
+
+    for (var j = rightMin; j <= bgParts; j++) {
+      var d = (j - index) * waveStagger;
+      TweenLite.to(".ws-bg__part-" + j, changeAT - d, {y: y, delay: d});
+    }
+
+    TweenLite.to($headings, changeAT, {y: textY});
+  };
+
+  function waveChange() {
+    waveBlocked = true;
+    var y = (curPage - 1) * winH * -1;
+    var textY = textH * (curPage - 1) * -1;
+
+    for (var i = 1; i <= bgParts; i++) {
+      var d = (i - 1) * waveStagger + waveStartDelay;
+      TweenLite.to(".ws-bg__part-" + i, changeAT, {y: y, delay: d});
+    }
+
+    TweenLite.to($headings, changeAT, {y: textY, delay: d});
+
+    var delay = (changeAT + waveStagger * (bgParts - 1)) * 2000;
+    setTimeout(function() {
+      waveBlocked = false;
+    }, delay);
+  };
+
+  function navigateUp() {
+    if (curPage > 1) curPage--;
+  };
+
+  function navigateDown() {
+    if (curPage < numOfPages) curPage++;
+  };
+
+  function navigateWaveUp() {
+    if (curPage === 1) return;
+    curPage--;
+    waveChange();
+  };
+
+  function navigateWaveDown() {
+    if (curPage === numOfPages) return;
+    curPage++;
+    waveChange();
+  };
+
+  function movePart($part, y) {
+    var y = y - (curPage - 1) * winH;
+    var headY = headingsY - (curPage - 1) * textH;
+    TweenLite.to($part, changeAT, {y: y, ease: Back.easeOut.config(4)});
+    TweenLite.to($headings, changeAT, {y: headY});
+  };
+
+  function moveParts(y, index) {
+    var leftMax = index - 1;
+    var rightMin = index + 1;
+    var stagLeft = 0;
+    var stagRight = 0;
+    var stagStepL = 0;
+    var stagStepR = 0;
+    var sign = (y > 0) ? -1 : 1;
+
+    movePart(".ws-bg__part-" + index, y);
+
+    for (var i = leftMax; i > 0; i--) {
+      var step = index - i;
+      var sVal = staggerVal - stagStepL;
+      stagStepL += (step <= 15) ? staggerStep : 1;
+      if (sVal < 0) sVal = 0;
+      stagLeft += sVal;
+      var nextY = y + stagLeft * sign;
+      if (Math.abs(y) < Math.abs(stagLeft)) nextY = 0;
+      movePart(".ws-bg__part-" + i, nextY);
+    }
+
+    for (var j = rightMin; j <= bgParts; j++) {
+      var step = j - index;
+      var sVal = staggerVal - stagStepR;
+      stagStepR += (step <= 15) ? staggerStep : 1;
+      if (sVal < 0) sVal = 0;
+      stagRight += sVal;
+      var nextY = y + stagRight * sign;
+      if (Math.abs(y) < Math.abs(stagRight)) nextY = 0;
+      movePart(".ws-bg__part-" + j, nextY);
+    }
+  };
+
+  var mousemoveHandler = rafThrottle(function(e) {
+    var y = e.pageY;
+    var x = e.pageX;
+    index = Math.ceil(x / winW * bgParts);
+
+    deltaY = y - startY;
+    headingsY = textH * deltaY / winH;
+    moveParts(deltaY, index);
+  });
+
+  var touchmoveHandler = rafThrottle(function(e) {
+    e.preventDefault();
+    var y = e.originalEvent.touches[0].pageY;
+    var x = e.originalEvent.touches[0].pageX;
+    index = Math.ceil(x / winW * bgParts);
+
+    deltaY = y - startY;
+    headingsY = textH * deltaY / winH;
+    moveParts(deltaY, index);
+  });
+
+  var swipeEndHandler = function() {
+    $(document).off("mousemove", mousemoveHandler);
+    $(document).off("touchmove", touchmoveHandler);
+    $(document).off("mouseup touchend", swipeEndHandler);
+
+    if (!deltaY) return;
+
+    if (deltaY / winH >= 0.5) navigateUp();
+    if (deltaY / winH <= -0.5) navigateDown();
+    changePages();
+  };
+
+  $(document).on("mousedown touchstart", ".ws-bg__part", function(e) {
+    startY = e.pageY || e.originalEvent.touches[0].pageY;
+    deltaY = 0;
+
+    $(document).on("mousemove", mousemoveHandler);
+    $(document).on("touchmove", touchmoveHandler);
+
+    $(document).on("mouseup touchend", swipeEndHandler);
+  });
+
+  $(document).on("mousewheel DOMMouseScroll", function(e) {
+    if (waveBlocked) return;
+    if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+      navigateWaveUp();
+    } else { 
+      navigateWaveDown();
+    }
+  });
+
+  $(document).on("keydown", function(e) {
+    if (waveBlocked) return;
+    if (e.which === 38) {
+      navigateWaveUp();
+    } else if (e.which === 40) {
+      navigateWaveDown();
+    }
+  });
+
+  $(window).on("resize", function() {
+    winW = $(window).width();
+    winH = $(window).height();
+    changePages();
+  });
+
+  $('.navigate .next').on('click', function() {
+  	navigateWaveUp();
+  });
+  $('.navigate .prev').on('click', function() {
+  	navigateWaveDown();
+  });
+
 
  }
 
-//BACKLINK
-function backlink() {
-	$('.backlink').on('click', function(e) { 
-		e.preventDefault();
-		var href = $(this).attr("href");
-		history.pushState('', 'new URL: '+href, href); 
-		
-		$(".page-overlay").addClass("from-bottom");
-		
-		setTimeout(function() {
-		location.reload();
-		}, 1000);
-});
+
+// LEFT MENU
+
+function leftmenu (){
+  $('header .menu').on('click', function() {
+  	$('.right-menu').toggleClass('active');
+  });
+
+  $('.right-menu .close-icon').on('click', function() {
+    $('.right-menu').removeClass('active');
+  });
+
+  $('.right-menu nav ul li.hassub i').on('click', function() {
+  	$(this).parent().children('ul').slideToggle();
+  });
+
 
 }
-
-function pagefect() { 
-(function($) { "use strict"; 
-	
-var portfolioKeyword;
-	$(function() {
-		$('html').addClass('modern-layout');
-		$.address.change(function() {
-			setActivePage();
-			$('html').removeClass('is-menu-toggled-on');	
-			});
-		$('.nav-menu a').on("click", function() {
-			if( window.isAnimating ) {
-				return false;
-			}
-		});
-	});
-	function giveDetailUrl() {
-		var address = $.address.value();
-		var detailUrl;
-		if (address.indexOf("/"+ portfolioKeyword + "/")!=-1 && address.length > portfolioKeyword.length + 2 ) {
-			var total = address.length;
-			detailUrl = address.slice(portfolioKeyword.length+2,total);
-			console.log(detailUrl)
-		} else {
-			detailUrl = -1;	
-		}
-		return detailUrl;
-	}
-	
-	function setActivePage() {
-		var path = $.address.path();
-		path = path.slice(1, path.length);
-		path = giveDetailUrl() != -1 ? portfolioKeyword : path;
-		$('.down-arrow').on('click', function() {
-			$(".down-arrow").css("pointer-events", "none");
-			setTimeout(function(){
-				$(".down-arrow").css("pointer-events", "auto");
-			 },700);
-		});
-		if(path != 'hero' && path != ''){
-			$('header').addClass('second');
-			$('.down-arrow').attr("href", "#/hero");
-			$('header').removeClass('white-home');
-		}else{
-			$('header').addClass('white-home');
-			$('header').removeClass('second');
-			var bu = $('header nav ul li').index() + 1;
-			var nexthref = $('header nav ul li:eq('+bu+')').children('a').attr('href');
-			$('.down-arrow').attr("href", nexthref);
-		}
-		if(path == "") {
-			var firstPage = $('.nav-menu li').first().find('a').attr('href');
-			path = firstPage.slice(2,firstPage.length);
-			
-				if(!($('.page-current').length)) { 
-					$('#'+ path).addClass( 'page-current' );
-					current = $('#'+ path).index();
-					setCurrentMenuItem();
-				} else {
-						PageTransitions.nextPage( $('#'+ path).index() );
-
-				}	
-			setCurrentMenuItem();
-			return false;
-			}
-		else { 
-				if(giveDetailUrl() == -1){
-					
-				
-						if(!($('.page-current').length)) { 
-							$('#'+ path).addClass( 'page-current' );
-							current = $('#'+ path).index();
-							setCurrentMenuItem();
-						} else {
-								PageTransitions.nextPage( $('#'+ path).index() );
-							
-						}	
-						
-				}
-				
-		}
-	}	
-	function setCurrentMenuItem() {
-		var activePageId = $('.pt-page.page-current').attr('id');
-		$('.nav-menu a[href$=' + activePageId +']').parent().addClass('current_page_item').siblings().removeClass('current_page_item');
-	}	
-	var current = 0;
-	var inClass, outClass;
-	window.nextAnimation = $('html').data("next-animation");
-	window.prevAnimation = $('html').data("prev-animation");
-	window.randomize = $('html').data("random-animation");
-	window.isAnimating = false;
-	var PageTransitions = (function() {
-
-		var $main = $( '#main' ),
-			$pages = $main.children( '.pt-page' ),
-			$menuLinks = $('.nav-menu a'),
-			animcursor = 1,
-			endCurrPage = false,
-			endNextPage = false,
-			animEndEventNames = {
-				'WebkitAnimation' : 'webkitAnimationEnd',
-				'OAnimation' : 'oAnimationEnd',
-				'msAnimation' : 'MSAnimationEnd',
-				'animation' : 'animationend'
-			},
-			animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ],
-			support = Modernizr.cssanimations;
-		
-		function init() {
-		}
-		function nextPage(nextPageIndex) {
-			if(nextPageIndex === current) {
-				return; 
-			}
-			
-			var animation = nextPageIndex > current ? nextAnimation : prevAnimation;
-			if(randomize) {
-				if( animcursor > 67 ) {
-					animcursor = 1;
-				}
-				animation = animcursor;
-				++animcursor;	
-			}
-			
-			if( window.isAnimating ) {
-				return false;
-			}
-	
-			window.isAnimating = true;
-			
-			var $currPage = $pages.eq( current );
-			
-			current = nextPageIndex; 
-
-			var $nextPage = $pages.eq( current ).addClass( 'page-current' );
-	
-			switch( animation ) {
-	
-				case 1:
-					outClass = 'pt-page-moveToLeft';
-					inClass = 'pt-page-moveFromRight';
-					break;
-				case 2:
-					outClass = 'pt-page-moveToRight';
-					inClass = 'pt-page-moveFromLeft';
-					break;
-				case 3:
-					outClass = 'pt-page-moveToTop';
-					inClass = 'pt-page-moveFromBottom';
-					break;
-				case 4:
-					outClass = 'pt-page-moveToBottom';
-					inClass = 'pt-page-moveFromTop';
-					break;
-				case 5:
-					outClass = 'pt-page-fade';
-					inClass = 'pt-page-moveFromRight pt-page-ontop';
-					break;
-				case 6:
-					outClass = 'pt-page-fade';
-					inClass = 'pt-page-moveFromLeft pt-page-ontop';
-					break;
-				case 7:
-					outClass = 'pt-page-fade';
-					inClass = 'pt-page-moveFromBottom pt-page-ontop';
-					break;
-				case 8:
-					outClass = 'pt-page-fade';
-					inClass = 'pt-page-moveFromTop pt-page-ontop';
-					break;
-				case 9:
-					outClass = 'pt-page-moveToLeftFade';
-					inClass = 'pt-page-moveFromRightFade';
-					break;
-				case 10:
-					outClass = 'pt-page-moveToRightFade';
-					inClass = 'pt-page-moveFromLeftFade';
-					break;
-				case 11:
-					outClass = 'pt-page-moveToTopFade';
-					inClass = 'pt-page-moveFromBottomFade';
-					break;
-				case 12:
-					outClass = 'pt-page-moveToBottomFade';
-					inClass = 'pt-page-moveFromTopFade';
-					break;
-				case 13:
-					outClass = 'pt-page-moveToLeftEasing pt-page-ontop';
-					inClass = 'pt-page-moveFromRight';
-					break;
-				case 14:
-					outClass = 'pt-page-moveToRightEasing pt-page-ontop';
-					inClass = 'pt-page-moveFromLeft';
-					break;
-				case 15:
-					outClass = 'pt-page-moveToTopEasing pt-page-ontop';
-					inClass = 'pt-page-moveFromBottom';
-					break;
-				case 16:
-					outClass = 'pt-page-moveToBottomEasing pt-page-ontop';
-					inClass = 'pt-page-moveFromTop';
-					break;
-				case 17:
-					outClass = 'pt-page-scaleDown';
-					inClass = 'pt-page-moveFromRight pt-page-ontop';
-					break;
-				case 18:
-					outClass = 'pt-page-scaleDown';
-					inClass = 'pt-page-moveFromLeft pt-page-ontop';
-					break;
-				case 19:
-					outClass = 'pt-page-scaleDown';
-					inClass = 'pt-page-moveFromBottom pt-page-ontop';
-					break;
-				case 20:
-					outClass = 'pt-page-scaleDown';
-					inClass = 'pt-page-moveFromTop pt-page-ontop';
-					break;
-				case 21:
-					outClass = 'pt-page-scaleDown';
-					inClass = 'pt-page-scaleUpDown pt-page-delay300';
-					break;
-				case 22:
-					outClass = 'pt-page-scaleDownUp';
-					inClass = 'pt-page-scaleUp pt-page-delay300';
-					break;
-				case 23:
-					outClass = 'pt-page-moveToLeft pt-page-ontop';
-					inClass = 'pt-page-scaleUp';
-					break;
-				case 24:
-					outClass = 'pt-page-moveToRight pt-page-ontop';
-					inClass = 'pt-page-scaleUp';
-					break;
-				case 25:
-					outClass = 'pt-page-moveToTop pt-page-ontop';
-					inClass = 'pt-page-scaleUp';
-					break;
-				case 26:
-					outClass = 'pt-page-moveToBottom pt-page-ontop';
-					inClass = 'pt-page-scaleUp';
-					break;
-				case 27:
-					outClass = 'pt-page-scaleDownCenter';
-					inClass = 'pt-page-scaleUpCenter pt-page-delay400';
-					break;
-				case 28:
-					outClass = 'pt-page-rotateRightSideFirst';
-					inClass = 'pt-page-moveFromRight pt-page-delay200 pt-page-ontop';
-					break;
-				case 29:
-					outClass = 'pt-page-rotateLeftSideFirst';
-					inClass = 'pt-page-moveFromLeft pt-page-delay200 pt-page-ontop';
-					break;
-				case 30:
-					outClass = 'pt-page-rotateTopSideFirst';
-					inClass = 'pt-page-moveFromTop pt-page-delay200 pt-page-ontop';
-					break;
-				case 31:
-					outClass = 'pt-page-rotateBottomSideFirst';
-					inClass = 'pt-page-moveFromBottom pt-page-delay200 pt-page-ontop';
-					break;
-				case 32:
-					outClass = 'pt-page-flipOutRight';
-					inClass = 'pt-page-flipInLeft pt-page-delay500';
-					break;
-				case 33:
-					outClass = 'pt-page-flipOutLeft';
-					inClass = 'pt-page-flipInRight pt-page-delay500';
-					break;
-				case 34:
-					outClass = 'pt-page-flipOutTop';
-					inClass = 'pt-page-flipInBottom pt-page-delay500';
-					break;
-				case 35:
-					outClass = 'pt-page-flipOutBottom';
-					inClass = 'pt-page-flipInTop pt-page-delay500';
-					break;
-				case 36:
-					outClass = 'pt-page-rotateFall pt-page-ontop';
-					inClass = 'pt-page-scaleUp';
-					break;
-				case 37:
-					outClass = 'pt-page-rotateOutNewspaper';
-					inClass = 'pt-page-rotateInNewspaper pt-page-delay500';
-					break;
-				case 38:
-					outClass = 'pt-page-rotatePushLeft';
-					inClass = 'pt-page-moveFromRight';
-					break;
-				case 39:
-					outClass = 'pt-page-rotatePushRight';
-					inClass = 'pt-page-moveFromLeft';
-					break;
-				case 40:
-					outClass = 'pt-page-rotatePushTop';
-					inClass = 'pt-page-moveFromBottom';
-					break;
-				case 41:
-					outClass = 'pt-page-rotatePushBottom';
-					inClass = 'pt-page-moveFromTop';
-					break;
-				case 42:
-					outClass = 'pt-page-rotatePushLeft';
-					inClass = 'pt-page-rotatePullRight pt-page-delay180';
-					break;
-				case 43:
-					outClass = 'pt-page-rotatePushRight';
-					inClass = 'pt-page-rotatePullLeft pt-page-delay180';
-					break;
-				case 44:
-					outClass = 'pt-page-rotatePushTop';
-					inClass = 'pt-page-rotatePullBottom pt-page-delay180';
-					break;
-				case 45:
-					outClass = 'pt-page-rotatePushBottom';
-					inClass = 'pt-page-rotatePullTop pt-page-delay180';
-					break;
-				case 46:
-					outClass = 'pt-page-rotateFoldLeft';
-					inClass = 'pt-page-moveFromRightFade';
-					break;
-				case 47:
-					outClass = 'pt-page-rotateFoldRight';
-					inClass = 'pt-page-moveFromLeftFade';
-					break;
-				case 48:
-					outClass = 'pt-page-rotateFoldTop';
-					inClass = 'pt-page-moveFromBottomFade';
-					break;
-				case 49:
-					outClass = 'pt-page-rotateFoldBottom';
-					inClass = 'pt-page-moveFromTopFade';
-					break;
-				case 50:
-					outClass = 'pt-page-moveToRightFade';
-					inClass = 'pt-page-rotateUnfoldLeft';
-					break;
-				case 51:
-					outClass = 'pt-page-moveToLeftFade';
-					inClass = 'pt-page-rotateUnfoldRight';
-					break;
-				case 52:
-					outClass = 'pt-page-moveToBottomFade';
-					inClass = 'pt-page-rotateUnfoldTop';
-					break;
-				case 53:
-					outClass = 'pt-page-moveToTopFade';
-					inClass = 'pt-page-rotateUnfoldBottom';
-					break;
-				case 54:
-					outClass = 'pt-page-rotateRoomLeftOut pt-page-ontop';
-					inClass = 'pt-page-rotateRoomLeftIn';
-					break;
-				case 55:
-					outClass = 'pt-page-rotateRoomRightOut pt-page-ontop';
-					inClass = 'pt-page-rotateRoomRightIn';
-					break;
-				case 56:
-					outClass = 'pt-page-rotateRoomTopOut pt-page-ontop';
-					inClass = 'pt-page-rotateRoomTopIn';
-					break;
-				case 57:
-					outClass = 'pt-page-rotateRoomBottomOut pt-page-ontop';
-					inClass = 'pt-page-rotateRoomBottomIn';
-					break;
-				case 58:
-					outClass = 'pt-page-rotateCubeLeftOut pt-page-ontop';
-					inClass = 'pt-page-rotateCubeLeftIn';
-					break;
-				case 59:
-					outClass = 'pt-page-rotateCubeRightOut pt-page-ontop';
-					inClass = 'pt-page-rotateCubeRightIn';
-					break;
-				case 60:
-					outClass = 'pt-page-rotateCubeTopOut pt-page-ontop';
-					inClass = 'pt-page-rotateCubeTopIn';
-					break;
-				case 61:
-					outClass = 'pt-page-rotateCubeBottomOut pt-page-ontop';
-					inClass = 'pt-page-rotateCubeBottomIn';
-					break;
-				case 62:
-					outClass = 'pt-page-rotateCarouselLeftOut pt-page-ontop';
-					inClass = 'pt-page-rotateCarouselLeftIn';
-					break;
-				case 63:
-					outClass = 'pt-page-rotateCarouselRightOut pt-page-ontop';
-					inClass = 'pt-page-rotateCarouselRightIn';
-					break;
-				case 64:
-					outClass = 'pt-page-rotateCarouselTopOut pt-page-ontop';
-					inClass = 'pt-page-rotateCarouselTopIn';
-					break;
-				case 65:
-					outClass = 'pt-page-rotateCarouselBottomOut pt-page-ontop';
-					inClass = 'pt-page-rotateCarouselBottomIn';
-					break;
-				case 66:
-					outClass = 'pt-page-rotateSidesOut';
-					inClass = 'pt-page-rotateSidesIn pt-page-delay200';
-					break;
-				case 67:
-					outClass = 'pt-page-rotateSlideOut';
-					inClass = 'pt-page-rotateSlideIn';
-					break;
-	
-			}
-	
-			$currPage.addClass( outClass ).on( animEndEventName, function() {
-				$currPage.off( animEndEventName );
-				endCurrPage = true;
-				if( endNextPage ) {
-					onEndAnimation( $currPage, $nextPage );
-				}
-			} );
-	
-			$nextPage.addClass( inClass ).on( animEndEventName, function() {
-				$nextPage.off( animEndEventName );
-				endNextPage = true;
-				if( endCurrPage ) {
-					onEndAnimation( $currPage, $nextPage );
-				}
-			} );
-	
-			if( !support ) {
-				onEndAnimation( $currPage, $nextPage );
-			}
-	
-		}
-	
-		function onEndAnimation( $outpage, $inpage ) {
-			endCurrPage = false;
-			endNextPage = false;
-			resetPage( $outpage, $inpage );
-			window.isAnimating = false;
-			setCurrentMenuItem();
-		}
-	
-		function resetPage( $outpage, $inpage ) {
-			$outpage.removeClass(outClass);
-			$inpage.removeClass(inClass);
-			$pages.eq( current ).siblings().removeClass( 'page-current' );
-		}
-		init();
-		return { 
-			init : init,
-			nextPage : nextPage
-		};
-	})();
-	window.nextPage = function(index) {
-		return new PageTransitions.nextPage(index);
-		};
-})(jQuery);
-
-return false;
-
-}
-  
-
-function others(){
-
-    $('.second .title').on('click', function() {
-        $(this).toggleClass('open');
-        $(this).next('.tab-content').slideToggle('open');
-    });
-}
-
-
 
  
-// OWL CAROUSEL JS  
-
-function carousel() {
-	var owlcar = $('.owl-carousel');
-	if (owlcar.length) {
-		owlcar.each(function () {
-			var $owl = $(this);
-			var itemsData = $owl.data('items');
-			var autoplayData = $owl.data('autoplay');
-			var autoPlayTimeoutData = $owl.data('autoplaytimeout');
-			var dotsData = $owl.data('dots');
-			var navData = $owl.data('nav');
-			var marginData = $owl.data('margin');
-			var stagePaddingData = $owl.data('stagepadding');
-			var itemsDesktopData = $owl.data('items-desktop');
-			var itemsTabletData = $owl.data('items-tablet');
-			var itemsTabletSmallData = $owl.data('items-tablet-small');
-			$owl.owlCarousel({
-				  items: itemsData
-				, dots: dotsData
-				, nav: navData
-				, margin: marginData
-				, loop: true
-				, stagePadding: stagePaddingData
-				, autoplay: autoplayData
-				, autoplayTimeout: autoPlayTimeoutData
-				, navText: ["<i class='fas fa-angle-left'></i>","<i class='fas fa-angle-right'></i>"]
-				, responsive:{
-						0:{
-							items:itemsTabletSmallData,
-							stagePadding:0
-						},
-						600:{
-							items:itemsTabletData,
-							stagePadding:0
-						},
-						1000:{
-							items:itemsDesktopData
-						}
-					}
-			, });
-		});
-	}
-    
-}
-
-
-
-
-function nav_type() {
-	var window_height = $(window).height();
-	var window_width = $(window).width();
-	var nav_a_height = $('header nav ul li a').width();
-	var nav_total = $('header nav ul li').length;
-	var nav_height = (nav_a_height * nav_total);
-	var logo_height = $('.logo').height();
-
-	if ( (nav_height + logo_height + 400) > window_height || window_width < 900 ){
-		$('header').addClass('mobile-version');
-	}else {
-		$('header').removeClass('mobile-version');
-	}
-
-	$('.mobile-btn').on('click', function() {
-		$('header').addClass('yes');
-		$('.mobile-btn').toggleClass('itsopend');
-		$('header.mobile-version nav').toggleClass('opened');
-	});
-	
-	
-	$('header.mobile-version nav ul li a').on('click', function() {
-		$('.mobile-btn').removeClass('itsopend');
-		$('header.mobile-version nav, .mobile-btn').removeClass('opened');
-	});
-}
-
-
-
-
-
-//PORTFOLIO GRIDS
-function PortfolioGrids() {
-    var $container = $('.masonry');
-    $container.imagesLoaded( function() {   
-        $container.isotope({
-          layoutMode: 'packery',
-          itemSelector: '.grid-item',
-          gutter:0,
-          transitionDuration: "0.5s",
-          columnWidth: '.grid-item'
+  // OWL CAROUSEL
+  function owlslider() { 
+    var owlcar = $('.owl-carousel');
+    if (owlcar.length) {
+        owlcar.each(function () {
+            var $owl = $(this);
+            var itemsData = $owl.data('items');
+            var autoplayData = $owl.data('autoplay');
+            var autoPlayTimeoutData = $owl.data('autoplaytimeout');
+            var dotsData = $owl.data('dots');
+            var navData = $owl.data('nav');
+            var marginData = $owl.data('margin');
+            var stagePaddingData = $owl.data('stagepadding');
+            var itemsDesktopData = $owl.data('items-desktop');
+            var itemsTabletData = $owl.data('items-tablet');
+            var itemsTabletSmallData = $owl.data('items-tablet-small');
+            $owl.owlCarousel({
+                  items: itemsData
+                , dots: dotsData
+                , nav: navData
+                , margin: marginData
+                , loop: true
+                , stagePadding: stagePaddingData
+                , autoplay: autoplayData
+                , autoplayTimeout: autoPlayTimeoutData
+                , navText: ["<i class='fas fa-arrow-left'></i>","<i class='fas fa-arrow-right'></i>"]
+                , responsive:{
+                        0:{
+                            items:itemsTabletSmallData,
+                            stagePadding:0
+                        },
+                        600:{
+                            items:itemsTabletData,
+                            stagePadding:0
+                        },
+                        1000:{
+                            items:itemsDesktopData
+                        }
+                    }
+            , });
         });
-    })
-        $('.portfolio_filter ul li a').on("click", function(){
-          $(".portfolio_filter ul li a").removeClass("select-cat");
-          $(this).addClass("select-cat");        
-          var selector = $(this).attr('data-filter');
-          $(".masonry").isotope({
-              filter: selector,
-              animationOptions: {
-                  duration: 750,
-                  easing: 'linear',
-                  queue: false,
-        }
-      });
-          return false;
-      });   
-
-      $(".filter-icon").on("click", function() {
-        $('.portfolio_filter').addClass('show');   
-      });
-
-      $(".portfolio_filter, .portfolio_filter ul li a").on("click", function (event) {
-        if (!$(event.target).is(".portfolio_filter ul li a")) {
-                $('.portfolio_filter').removeClass('show');
-                return false;
-            }
-        }); 
-  
-      // Infinite Scroll
-      var curPage = 1;
-      var pagesNum = $("#pagination-selector").find("li a:last").text();   // Number of pages
-  
-      $container.infinitescroll({
-          itemSelector: '.grid-item',
-          nextSelector: '.portfolio-pagination li a',
-          navSelector: '#pagination-selector',
-          extraScrollPx: 0,
-          bufferPx: 0,
-          maxPage: 6,
-          loading: {
-              finishedMsg: "No more works",
-              msgText: '<div class="loader"><span></span></div>',
-              speed: 'slow',
-              selector: '.load-more',
-          },
-      },
-      // trigger Masonry as a callback
-      function( newElements ) {
-  
-            var $newElems = $( newElements );
-            $newElems.imagesLoaded(function(){  // Append masonry        
-              $newElems.animate({ opacity: 1 });
-              $container.isotope( 'appended', $newElems, true ); 
-            });
-            // Check last page
-            curPage++;
-            if(curPage == pagesNum) {
-              $( '.load-more button' ).remove();
-            }
-            $('.load-more').find('button').css('visibility', 'visible');
-          });
-  
-          $container.infinitescroll( 'unbind' );
-          // jQuery
-      $container.on( 'append.infinitescroll', function( event, response, path, items ) {
-        console.log( 'Loaded: ' + path );
-      });
-  
-  
-          $( '.load-more button' ).on('click', function() {
-            setTimeout(function()
-             { 
-              port_load();   
-              $('.grid-item').addClass('in-view'); 
-              },1000);      
-            $container.infinitescroll( 'retrieve' );
-            $('.load-more').find('button').css('visibility', 'hidden');
-            return false;
-		  });
-		  
-	
     }
-
-
-
-//CONTACT FORM
-function cform() {
-	$("form .form-group input, form .form-group textarea").focus(function(){
-  
-	  $(this).parents('.form-group').addClass('in');
-  
-	  $('form .form-group input, form .form-group textarea').blur(function()
-		  {
-			  if( !$(this).val() ) {
-					$(this).parents('.form-group').removeClass('in');
-			  }
-		  });
-	});
-}
-  
-
-
-// HOME TEXT TYPE EFFECT 
-function typist() {
-    var typist;
-    typist = document.querySelector("#element");
-    new Typist(typist, {
-      letterInterval: 60,
-      textInterval: 3000
-    });
-
-}
-
-
-function port_close() {
-
-    $(window).scroll( function(){
-		var st = $(this).scrollTop();
-		var sh = $('.work-hero').outerHeight();
-		if( st >= sh ){
-			$('#backpage').addClass('dark');
-		}else{
-			$('#backpage').removeClass('dark');
-		}
-    });
-
 }
 
 
 
-// MAGNIFIC POPUP    
+// ALL PROJECT
+function allproject() {
+  $(".see-all").on('click', function() {
+      $('.all-projects').addClass('active');
+  }); 
+    $(".all-projects .close-icon").on('click', function() {
+      $('.all-projects').removeClass('active');
+  }); 
+}
+
+
+// LIGHTBOX
 function lightbox() {
-    $('.lightbox').magnificPopup({
-          type:'image',
-          gallery:{enabled:true},
-          zoom:{enabled: true, duration: 300}
+  $('.lightbox').magnificPopup({
+        type:'image',
+        gallery:{enabled:true},
+        zoom:{enabled: true, duration: 300}
+    });
+}
+
+
+function smooth_scroll() {
+  if ($('#smooth-scroll').length) {
+    var elem = document.querySelector("#smooth-scroll");
+    var scrollbar = Scrollbar.init(elem,
+    {
+      renderByPixels: true,
+      damping:0.05
+    }); 
+      $(".back-top").on('click', function() {
+        TweenLite.to(scrollbar, 1.5, {scrollTop:0, ease:Power4.easeInOut});
+  }); 
+  }
+}
+
+// BACK TOP TOP
+function backtop() {
+  $(".back-top").on('click', function() {
+    if ($("body").hasClass("smooth-scroll")) {
+        TweenLite.to(scrollbar, 1.5, {scrollTop:0, ease:Power4.easeInOut});
+      } else {
+        $("html,body").animate({scrollTop: 0}, 800);
+      }
+  }); 
+}
+
+
+// animate each
+
+function page_anim() { 
+
+    var controller = new ScrollMagic.Controller();
+
+    
+
+    $('.box-animation').each(function(){
+      var $this = $(this);
+      var $thisHeight = $(this).height();
+        
+      var scene = new ScrollMagic.Scene({triggerElement:$this[0],duration: $thisHeight})
+      .addTo(controller);
+        
+      
+      scene.triggerHook(1)
+      
+      scene.on('enter', function(){
+        $this.delay($this.attr('data-delay')).queue(function(next){
+          TweenMax.to($this, 0.6, {force3D:true, opacity:1, y:0, scale:1, delay:0.1, ease:Power2.easeOut});
+          next();
+        });
       });
-  }
-
-  
-
-function preloader() {
-
-	var width = 100,
-	perfData = window.performance.timing,
-	EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart),
-	time = parseInt((EstimatedTime / 1000) % 60) * 40;
-
-
-var PercentageID = $("#precent"),
-	start = 0,
-	end = 100,
-	durataion = time;
-animateValue(PercentageID, start, end, durataion);
-
-function animateValue(id, start, end, duration) {
-
-var range = end - start,
-		current = start,
-		increment = end > start ? 1 : -1,
-		stepTime = Math.abs(Math.floor(duration / range)),
-		obj = $(id);
-
-var timer = setInterval(function () {
-	current += increment;
-	$(obj).text(current + "%");
-	$(".loader_bar").css({width: current + '%'})
-
-	if (current == end) {
-		clearInterval(timer);
-	}
-}, stepTime);
+      
+      scene.on('leave', function(event){
+        $this.removeClass('active');
+      });
+      
+      if ($("body").hasClass("smooth-scroll")) {
+        scrollbar.addListener(() => {
+          scene.refresh()
+        });
+      }
+    })
+    
+    $('.text-animation').each(function(){
+      var words = $(this).text().split(" ");
+      var total = words.length;
+      $(this).empty();
+      for (index = 0; index < total; index ++){
+        $(this).append($("<span /> ").text(words[index]));
+      }
+    });
+    
+    $('.text-animation span').each(function(){
+      var words = $(this).text().split(" ");
+      var total = words.length;
+      $(this).empty();
+      for (index = 0; index < total; index ++){
+        $(this).append($("<span /> ").text(words[index]));
+      }
+    });
+    
+    $('.text-animation').each(function(){
+      var $this = $(this);
+      var $thisHeight = $(this).height();
+      
+      var scene = new ScrollMagic.Scene({triggerElement:$this[0],duration: $thisHeight})
+        .addTo(controller);
+      
+      scene.triggerHook(1)
+      
+      scene.on('enter', function(){       
+        
+        var tl = new TimelineLite();
+            
+        $this.find('span > span').each(function(index, element) {
+          tl.to(element, 0.6, {y:0, opacity:1, delay:0.1, ease:Power2.easeOut}, index * 0.03)
+        });
+      });
+        
+      });
 }
 
 
-setTimeout(function () {
-$('.preloader-wrap').fadeOut(400);
-}, time);
+  function preloader() {
+     $('body').waitForImages(function() {
+        $(".loader").fadeOut();
+        $(".preloader").fadeOut("slow");
+    });
 
 }
 
+function hasTouch() {
+    return 'ontouchstart' in document.documentElement
+           || navigator.maxTouchPoints > 0
+           || navigator.msMaxTouchPoints > 0;
+}
 
-//SLIDER
-function slider () {
+if (hasTouch()) { // remove all :hover stylesheets
+    try { // prevent exception on browsers not supporting DOM styleSheets properly
+        for (var si in document.styleSheets) {
+            var styleSheet = document.styleSheets[si];
+            if (!styleSheet.rules) continue;
 
-	var homeImgURLs = [];
-  jQuery('.slider-images ul li').each(function(index) {
-	homeImgURLs.push({
-	  src: jQuery(this).attr('data-src'),
-	  fade: 1000
-	});
+            for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+                if (!styleSheet.rules[ri].selectorText) continue;
+
+                if (styleSheet.rules[ri].selectorText.match(':hover')) {
+                    styleSheet.deleteRule(ri);
+                }
+            }
+        }
+    } catch (ex) {}
+}
+
+
+ /*--------------------------------------------------
+   SIDEBAR JS
+---------------------------------------------------*/ 
+
+function sidebar(){
+
+  $('.sidebar-menu').on("click", function(){
+      $('.sidebar').addClass('open');
   });
-  
-  var delay_data = jQuery('.slider-images').data('delay');
-  
-  
-	jQuery(".slider-images").vegas({
-	  slides: homeImgURLs,
-		  animation: ['kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight'],
-		  delay: delay_data * 1000,
-		  shuffle:true
-	  });
-  }
+  $('.sidebar-close').on("click", function(){
+      $('.sidebar').removeClass('open');
+  });
+
+}
 
 
-  //CONTACT FORM
-  function ContactForm() {	
-	
-	if( jQuery('#contact-formular').length > 0 ){
-		$('#contactform').submit(function(){
-			var action = $(this).attr('action');
-			$("#message").slideUp(750,function() {
-				$('#message').hide();
-				$('#submit').attr('disabled','disabled');		
-				$.post(action, {
-					name: $('#name').val(),
-					email: $('#email').val(),
-					comments: $('#comments').val()
-				},
-				function(data){
-					document.getElementById('message').innerHTML = data;
-					$('#message').slideDown('slow');
-					$('#contactform img.loader').fadeOut('slow',function(){$(this).remove()});
-					$('#submit').removeAttr('disabled');
-					if(data.match('success') != null) $('#contactform').slideUp('slow');		
-				}
-			);		
-			});		
-			return false;		
-		});		
-	}
 
-}//End ContactForm		
+}); // document read end 
+
+
+

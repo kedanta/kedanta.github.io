@@ -104,7 +104,6 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {   
-  border-color: rgba(0, 0, 0, 0.38) !important;
   outline: 0 none;
 }
 
