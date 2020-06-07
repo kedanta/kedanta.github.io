@@ -318,7 +318,7 @@ package_ver = 'v1.0';
 
 
     /*----------  FORM FUNCTIONS  ----------*/
-    ckav.global_validation = {
+     ckav.global_validation = {
 		form: '',
 		rules: {
 			email: { required: true, email: true },
@@ -338,7 +338,7 @@ package_ver = 'v1.0';
 
 		successMsg: "",
 		errorMsg: "Oops! Looks like something went wrong. Please try again later."
-	}
+	} 
 
     ckav.formVaidate = function (obj) {
 		'use strict';
@@ -524,7 +524,7 @@ package_ver = 'v1.0';
 			}
 		});
 		return o;
-	};
+	}; 
 	
 	/*----------  IMAGE POPUP  ----------*/
 	ckav.popupImageFunction = function(element) {

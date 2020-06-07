@@ -189,7 +189,7 @@
                     <p class="heading-sub width-60 margin-auto" data-ckav-smd="width-100 mini">
                         Kelompok Aksi &amp; Diskusi Naposo Batak
                     </p>
-                    <a href="#popup-content" class="set-popup button button-xlarge color-button-default color-hov-button-white solid radius-10" data-ckav-smd="button-medium">Lear More</a>
+                    <a href="#popup-content" class="set-popup button button-xlarge color-button-default color-hov-button-white solid radius-10 color-hov-text-default" data-ckav-smd="button-medium">Selengkapnya</a>
                 </div>
 
             </div>
@@ -680,43 +680,49 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" data-form-type="formoid">
 
                                 <div class="section-heading-wrapper" data-ckav-smd="align-center margin-t-30">
                                     <h2 class="heading-section text-upper default bold-900 animated" data-anim-in="fadeInRight|0.1" data-ckav-smd="medium margin-b-0">Kirim Pesan</h2>
                                 </div>
                                 <hr class="color-border-default margin-tb-30 width-px-50 margin-l-0 border-t-2 animated" data-anim-in="fadeInRight|0.2" data-ckav-smd="margin-auto">
-                                <form action="form-data/formdata.php" class="form-widget form-control-op-light-02 animated" data-anim-in="fadeInRight|0.2" data-ckav-smd="align-center">
+								<div data-form-type="formoid">
+                                <form action="https://mobirise.com/" class="form-widget form-control-op-light-02 animated" data-anim-in="fadeInRight|0.2" data-ckav-smd="align-center" id="contact-form" enctype="multipart/form-data" method="POST" data-form-title="Mobirise Form">
                                     <div class="field-wrp">
-                                        <input type="hidden" name="to" value="c.kav.art@gmail.com">
-            
+										<input type="hidden" name="to" value="contact@kedanta.team">
+                                        <input type="hidden" name="email" data-form-email="true" value="rrZcGw1wwDGuEr2Vk99H2EkGSSYwayk1SpPXTkA3yBvTdnSLD7J9SPrNg25ZaLwKSIiHhdunNzh3zwfJYUAsDByHYQieUqIjiDfjJGVAib6yQtGVQgYDNA/PkwIyomiM">
                                         <div class="row gt10">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <input class="form-control radius-10" data-label="Name" required="" data-msg="Please enter name." type="text" name="name" placeholder="Enter your name">
+                                                    <input class="form-control radius-10" data-msg="Harap masukkan Nama" required="" type="text" name="name" placeholder="Nama*" data-form-field="Name" id="name-form4-2">
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <input class="form-control radius-10" data-label="Email" required="" data-msg="Please enter email." type="email" name="email" placeholder="Enter your email">
+                                                    <input class="form-control radius-10" data-msg="Harap masukkan email." required="" type="text" name="Email" placeholder="Email*" data-form-field="Email" id="email-form4-2">
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         <div class="form-group">
-                                            <input class="form-control radius-10" required="" data-label="Phone" data-msg="Please phone number." type="text" name="phone" placeholder="Enter your phone number">
+                                            <input class="form-control radius-10" data-msg="" required="" type="text" name="Phone" placeholder="Telepon/WA*" data-form-field="Phone" id="phone-form4-2">
                                         </div>
             
                                         <div class="form-group">
-                                            <input class="form-control radius-10" data-label="Subject" type="text" name="subject" placeholder="Enter subject">
+                                            <input class="form-control radius-10" type="text" name="Gereja" placeholder="Asal Gereja*" data-form-field="Subject" id="subject-form4-2">
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control radius-10" data-label="Message" required="" data-msg="Please enter your message." name="message" placeholder="Add your message" cols="30" rows="6"></textarea>
+                                            <textarea class="form-control radius-10" data-form-field="Message" required="" data-msg="Harap masukkan pesan." name="Message" placeholder="Pesan.." cols="30" rows="6" id="message-form4-2"></textarea>
                                         </div>
+										<div class="row">
+                            				<div hidden="hidden"  data-form-alert="" class="alert alert-success ml-4 w-100">Terimakasih, nantikan balasan dari kami. Horas!</div>
+                            				<div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12"></div>
+                        				</div>
                                     </div>
-                                    <button type="submit" class="button radius-10 solid color-button-default margin-0"><i class="fa fa-envelope-o"></i> KIRIM</button>
+                                    <button type="submit" class="button radius-10 solid color-button-default margin-0" value="Send message" name="submit" id="submitButton"><i class="fa fa-envelope-o"></i>KIRIM</button>
                                 </form>
+								</div>
                             </div>
                         </div>
 
@@ -794,7 +800,7 @@
         <div id="popup-content" class="white-popup-block popup-content animate fadeInDown mfp-hide radius-6">
             <div class="pop-header padding-b-0" data-ckav-sm="padding-30 padding-b-0">
                 <div class="square-90 iconwrp fs-80 margin-0 color-text-default"><i class="pe-7s-bell"></i></div>
-                <h2 class="heading-section default bold-900 text-upper mr-0" data-ckav-sm="small">Newsletter</h2>
+                <h2 class="heading-section default bold-900 text-upper mr-0" data-ckav-sm="small">Informasi Selengkapnya</h2>
             </div>
             <div class="pop-body padding-t-20" data-ckav-sm="padding-30 padding-t-30">
                 
@@ -802,18 +808,18 @@
 
                     <form action="form-data/notify-me.php" class="form-widget form-control-op-02" novalidate="novalidate">
                         <div class="field-wrp">
-                            <input type="hidden" name="to" value="c.kav.art@gmail.com">
+                            <input type="hidden" name="to" value="contact@kedanta.team">
 
                             <div class="row gt10">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input class="form-control radius-6" data-label="Name" required="" data-msg="Please enter name." type="text" name="name" placeholder="Enter your name">
+                                        <input class="form-control radius-6" data-label="Name" required="" data-msg="Harap Masukkan Nama" type="text" name="name" placeholder="Nama (Wajib)">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input class="form-control radius-6" data-label="Email" required="" data-msg="Please enter email." type="email" name="email" placeholder="Enter your email">
+                                        <input class="form-control radius-6" data-label="Email" required="" data-msg="Harap Masukkan Email" type="email" name="email" placeholder="Email (Email)">
                                     </div>
                                 </div>
                             </div>
@@ -850,6 +856,7 @@
 
 <!-- TEMPLATE COMMON SCRIPTS -->
 <script src="js/main.js"></script>
+<script src="js/form-contact.js"></script>
 
 
 </body>

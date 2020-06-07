@@ -1,7 +1,9 @@
 <?php
 if (isset($_POST) && sizeof($_POST) > 0) {
 	
-	$to = $_POST['to']['val']; // <=== Set static email here.
+	/*$to = $_POST['to']['val']; // <=== Set static email here. */
+	
+	$to = "contact@kedanta.team"; // Your email ID
 	
 	if (isset($_POST['formtype'])) {
 		unset($_POST['formtype']);
