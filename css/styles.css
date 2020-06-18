@@ -913,3 +913,19 @@ body {
 /*=============================================
 = SECTION TITLE
 =============================================*/
+.info-allert{
+    position:relative;
+    height:50px;
+    top:50%;
+}
+    /*display: -webkit-flex;
+    display: flex;
+    -webkit-box-align:center;
+    -webkit-box-pack:center;
+    flex: 1;*/
+}
+
+.allert-content{
+    display: block;
+    margin: 0 auto;
+}
